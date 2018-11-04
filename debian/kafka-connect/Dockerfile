@@ -40,3 +40,6 @@ RUN echo "===> Installing JDBC, Elasticsearch and Hadoop connectors ..." \
 
 RUN echo "===> Installing GCS Sink Connector ..."
 RUN confluent-hub install confluentinc/kafka-connect-gcs:latest --no-prompt
+
+RUN echo "===> Installing hbase Sink Connector ..."
+RUN confluent-hub install nishutayal/kafka-connect-hbase:1.0.0 --no-prompt
