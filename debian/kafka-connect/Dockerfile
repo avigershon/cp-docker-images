@@ -35,5 +35,11 @@ RUN echo "===> Installing JDBC, Elasticsearch and Hadoop connectors ..." \
         confluent-kafka-connect-storage-common=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
         confluent-kafka-connect-s3=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
         confluent-kafka-connect-jms=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
+    &&  mkdir confluent-hub \
+    && wget http://client.hub.confluent.io/confluent-hub-client-latest.tar.gz -O confluent-hub/confluent-hub-client-latest.tar.gz \
+    && cd confluent-hub \
+    && tar -xzf confluent-hub-client-latest.tar.gz \
+    && export PATH=$PATH:$(pwd)/bin \
+    && yes | confluent-hub install nishutayal/kafka-connect-hbase:1.0.0 \
     && echo "===> Cleaning up ..."  \
     && apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/*
